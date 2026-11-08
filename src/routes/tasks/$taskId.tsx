@@ -6,11 +6,11 @@ import { useTask, useUpdateTask } from '@/features/tasks/api';
 import { useEffect } from 'react';
 
 const taskSchema = z.object({
-  agent_id: z.number().positive('Task must be a positive number'),
-  assignment: z.string().min(1, 'Assignment is too short'),
-  status: z.string().min(1, 'Status is too short'),
-  date: z.string().date(),
-  deadline: z.string().date(),
+	agent_id: z.number().positive("Task must be a positive number"),
+	assignment: z.string().min(1, "Assignment is too short"),
+	status: z.string().min(1, "Status is too short"),
+	date: z.iso.date(),
+	deadline: z.iso.date(),
 });
 
 type TaskFormData = z.infer<typeof taskSchema>;
@@ -61,7 +61,12 @@ function $taskId() {
 					</label>
 					<input
 						id="agent_id"
-						{...register("agent_id")}
+						type="number"
+						{...register("agent_id", {
+							valueAsNumber: true,
+							required: "ID агенту обов'язкове",
+							validate: (value) => !isNaN(value) || "Введіть коректне число",
+						})}
 						className="w-full p-2 border rounded"
 					/>
 					{errors.agent_id && (
@@ -76,7 +81,9 @@ function $taskId() {
 					</label>
 					<input
 						id="assignment"
-						{...register("assignment")}
+						{...register("assignment", {
+							required: "Задача обов'язкова",
+						})}
 						className="w-full p-2 border rounded"
 					/>
 					{errors.assignment && (
@@ -91,7 +98,9 @@ function $taskId() {
 					</label>
 					<input
 						id="status"
-						{...register("status")}
+						{...register("status", {
+							required: "Статус обов'язковий",
+						})}
 						className="w-full p-2 border rounded"
 					/>
 					{errors.status && (
@@ -100,11 +109,14 @@ function $taskId() {
 				</div>
 				<div>
 					<label htmlFor="date" className="block font-medium">
-						Passport
+						Date
 					</label>
 					<input
 						id="date"
-						{...register("date")}
+						type="date"
+						{...register("date", {
+							required: "Дата обов'язкова",
+						})}
 						className="w-full p-2 border rounded"
 					/>
 					{errors.date && (
@@ -113,11 +125,14 @@ function $taskId() {
 				</div>
 				<div>
 					<label htmlFor="deadline" className="block font-medium">
-						Telephone
+						Deadline
 					</label>
 					<input
 						id="deadline"
-						{...register("deadline")}
+						type="date"
+						{...register("deadline", {
+							required: "Дедлайн обов'язковий",
+						})}
 						className="w-full p-2 border rounded"
 					/>
 					{errors.deadline && (

@@ -2,11 +2,11 @@ import { createFileRoute } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useLogin } from '@/features/auth/use-login';
+import { useLogin } from "@/features/auth/login.ts";
 
 const loginSchema = z.object({
-	email: z.string().min(1, 'Password is too short'),
-	password: z.string().min(1, 'Password is too short'),
+	email: z.string().min(1, "Email is too short"),
+	password: z.string().min(1, "Password is too short"),
 });
 
 type LoginFormData = z.infer<typeof loginSchema>;

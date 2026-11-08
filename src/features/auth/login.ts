@@ -1,4 +1,4 @@
-// features/auth/use-login.ts
+// features/auth/login.ts
 import { useMutation } from "@tanstack/react-query";
 import { z } from "zod";
 import { apiFetch } from "@/api.ts";
@@ -19,4 +19,3 @@ export function useLogin() {
 		onSuccess: (token) => setToken(token),
 	});
 }
-// у формі: const login = useLogin(); … login.mutate({ email, password }); login.isPending, login.error

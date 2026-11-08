@@ -1,7 +1,7 @@
 import { Link, createFileRoute } from '@tanstack/react-router';
 import { useAgents, useDeleteAgent } from '@/features/agents/api.ts';
 
-export const Route = createFileRoute('/agents')({
+export const Route = createFileRoute('/agents/')({
   component: Agents,
 });
 

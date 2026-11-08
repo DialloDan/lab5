@@ -1,7 +1,7 @@
 import { Link, createFileRoute } from '@tanstack/react-router';
 import { useTasks, useDeleteTask } from '@/features/tasks/api.ts';
 
-export const Route = createFileRoute('/tasks')({
+export const Route = createFileRoute('/tasks/')({
   component: Tasks,
 });
 

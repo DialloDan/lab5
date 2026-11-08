@@ -9,28 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TasksRouteImport } from './routes/tasks'
 import { Route as LoginRouteImport } from './routes/login'
-import { Route as AgentsRouteImport } from './routes/agents'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TasksIndexRouteImport } from './routes/tasks/index'
+import { Route as AgentsIndexRouteImport } from './routes/agents/index'
 import { Route as TasksCreateRouteImport } from './routes/tasks/create'
 import { Route as TasksTaskIdRouteImport } from './routes/tasks/$taskId'
 import { Route as AgentsCreateRouteImport } from './routes/agents/create'
 import { Route as AgentsAgentIdRouteImport } from './routes/agents/$agentId'
 
-const TasksRoute = TasksRouteImport.update({
-  id: '/tasks',
-  path: '/tasks',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AgentsRoute = AgentsRouteImport.update({
-  id: '/agents',
-  path: '/agents',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -38,119 +28,119 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TasksIndexRoute = TasksIndexRouteImport.update({
+  id: '/tasks/',
+  path: '/tasks/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgentsIndexRoute = AgentsIndexRouteImport.update({
+  id: '/agents/',
+  path: '/agents/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TasksCreateRoute = TasksCreateRouteImport.update({
-  id: '/create',
-  path: '/create',
-  getParentRoute: () => TasksRoute,
+  id: '/tasks/create',
+  path: '/tasks/create',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const TasksTaskIdRoute = TasksTaskIdRouteImport.update({
-  id: '/$taskId',
-  path: '/$taskId',
-  getParentRoute: () => TasksRoute,
+  id: '/tasks/$taskId',
+  path: '/tasks/$taskId',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AgentsCreateRoute = AgentsCreateRouteImport.update({
-  id: '/create',
-  path: '/create',
-  getParentRoute: () => AgentsRoute,
+  id: '/agents/create',
+  path: '/agents/create',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AgentsAgentIdRoute = AgentsAgentIdRouteImport.update({
-  id: '/$agentId',
-  path: '/$agentId',
-  getParentRoute: () => AgentsRoute,
+  id: '/agents/$agentId',
+  path: '/agents/$agentId',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/agents': typeof AgentsRouteWithChildren
   '/login': typeof LoginRoute
-  '/tasks': typeof TasksRouteWithChildren
   '/agents/$agentId': typeof AgentsAgentIdRoute
   '/agents/create': typeof AgentsCreateRoute
   '/tasks/$taskId': typeof TasksTaskIdRoute
   '/tasks/create': typeof TasksCreateRoute
+  '/agents/': typeof AgentsIndexRoute
+  '/tasks/': typeof TasksIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/agents': typeof AgentsRouteWithChildren
   '/login': typeof LoginRoute
-  '/tasks': typeof TasksRouteWithChildren
   '/agents/$agentId': typeof AgentsAgentIdRoute
   '/agents/create': typeof AgentsCreateRoute
   '/tasks/$taskId': typeof TasksTaskIdRoute
   '/tasks/create': typeof TasksCreateRoute
+  '/agents': typeof AgentsIndexRoute
+  '/tasks': typeof TasksIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/agents': typeof AgentsRouteWithChildren
   '/login': typeof LoginRoute
-  '/tasks': typeof TasksRouteWithChildren
   '/agents/$agentId': typeof AgentsAgentIdRoute
   '/agents/create': typeof AgentsCreateRoute
   '/tasks/$taskId': typeof TasksTaskIdRoute
   '/tasks/create': typeof TasksCreateRoute
+  '/agents/': typeof AgentsIndexRoute
+  '/tasks/': typeof TasksIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/agents'
     | '/login'
-    | '/tasks'
     | '/agents/$agentId'
     | '/agents/create'
     | '/tasks/$taskId'
     | '/tasks/create'
+    | '/agents/'
+    | '/tasks/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/agents'
     | '/login'
-    | '/tasks'
     | '/agents/$agentId'
     | '/agents/create'
     | '/tasks/$taskId'
     | '/tasks/create'
+    | '/agents'
+    | '/tasks'
   id:
     | '__root__'
     | '/'
-    | '/agents'
     | '/login'
-    | '/tasks'
     | '/agents/$agentId'
     | '/agents/create'
     | '/tasks/$taskId'
     | '/tasks/create'
+    | '/agents/'
+    | '/tasks/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AgentsRoute: typeof AgentsRouteWithChildren
   LoginRoute: typeof LoginRoute
-  TasksRoute: typeof TasksRouteWithChildren
+  AgentsAgentIdRoute: typeof AgentsAgentIdRoute
+  AgentsCreateRoute: typeof AgentsCreateRoute
+  TasksTaskIdRoute: typeof TasksTaskIdRoute
+  TasksCreateRoute: typeof TasksCreateRoute
+  AgentsIndexRoute: typeof AgentsIndexRoute
+  TasksIndexRoute: typeof TasksIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/tasks': {
-      id: '/tasks'
-      path: '/tasks'
-      fullPath: '/tasks'
-      preLoaderRoute: typeof TasksRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/agents': {
-      id: '/agents'
-      path: '/agents'
-      fullPath: '/agents'
-      preLoaderRoute: typeof AgentsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -160,67 +150,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tasks/': {
+      id: '/tasks/'
+      path: '/tasks'
+      fullPath: '/tasks/'
+      preLoaderRoute: typeof TasksIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agents/': {
+      id: '/agents/'
+      path: '/agents'
+      fullPath: '/agents/'
+      preLoaderRoute: typeof AgentsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tasks/create': {
       id: '/tasks/create'
-      path: '/create'
+      path: '/tasks/create'
       fullPath: '/tasks/create'
       preLoaderRoute: typeof TasksCreateRouteImport
-      parentRoute: typeof TasksRoute
+      parentRoute: typeof rootRouteImport
     }
     '/tasks/$taskId': {
       id: '/tasks/$taskId'
-      path: '/$taskId'
+      path: '/tasks/$taskId'
       fullPath: '/tasks/$taskId'
       preLoaderRoute: typeof TasksTaskIdRouteImport
-      parentRoute: typeof TasksRoute
+      parentRoute: typeof rootRouteImport
     }
     '/agents/create': {
       id: '/agents/create'
-      path: '/create'
+      path: '/agents/create'
       fullPath: '/agents/create'
       preLoaderRoute: typeof AgentsCreateRouteImport
-      parentRoute: typeof AgentsRoute
+      parentRoute: typeof rootRouteImport
     }
     '/agents/$agentId': {
       id: '/agents/$agentId'
-      path: '/$agentId'
+      path: '/agents/$agentId'
       fullPath: '/agents/$agentId'
       preLoaderRoute: typeof AgentsAgentIdRouteImport
-      parentRoute: typeof AgentsRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
 
-interface AgentsRouteChildren {
-  AgentsAgentIdRoute: typeof AgentsAgentIdRoute
-  AgentsCreateRoute: typeof AgentsCreateRoute
-}
-
-const AgentsRouteChildren: AgentsRouteChildren = {
-  AgentsAgentIdRoute: AgentsAgentIdRoute,
-  AgentsCreateRoute: AgentsCreateRoute,
-}
-
-const AgentsRouteWithChildren =
-  AgentsRoute._addFileChildren(AgentsRouteChildren)
-
-interface TasksRouteChildren {
-  TasksTaskIdRoute: typeof TasksTaskIdRoute
-  TasksCreateRoute: typeof TasksCreateRoute
-}
-
-const TasksRouteChildren: TasksRouteChildren = {
-  TasksTaskIdRoute: TasksTaskIdRoute,
-  TasksCreateRoute: TasksCreateRoute,
-}
-
-const TasksRouteWithChildren = TasksRoute._addFileChildren(TasksRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AgentsRoute: AgentsRouteWithChildren,
   LoginRoute: LoginRoute,
-  TasksRoute: TasksRouteWithChildren,
+  AgentsAgentIdRoute: AgentsAgentIdRoute,
+  AgentsCreateRoute: AgentsCreateRoute,
+  TasksTaskIdRoute: TasksTaskIdRoute,
+  TasksCreateRoute: TasksCreateRoute,
+  AgentsIndexRoute: AgentsIndexRoute,
+  TasksIndexRoute: TasksIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
