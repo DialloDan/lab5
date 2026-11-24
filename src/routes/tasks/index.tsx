@@ -16,7 +16,34 @@ function Tasks() {
 
   if (isLoading) return <div>Loading...</div>;
 
-  if (isError) return <div>Error loading tasks: {error.message}</div>;
+  if (isError) return (
+		<div className="p-4">
+			<div className="flex justify-between items-center mb-4">
+				<h1 className="text-2xl font-bold">Tasks</h1>
+				<Link
+					to="/tasks/create"
+					className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+				>
+					Create New Task
+				</Link>
+
+				<Link
+					to="/agents"
+					className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+				>
+					Agents
+				</Link>
+
+				<Link
+					to="/login"
+					className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+				>
+					Log in
+				</Link>
+			</div>
+			<div>Error loading tasks: {error.message}</div>
+		</div>
+	);
 
   return (
 		<div className="p-4">
@@ -27,6 +54,20 @@ function Tasks() {
 					className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
 				>
 					Create New Task
+				</Link>
+
+				<Link
+					to="/agents"
+					className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+				>
+					Agents
+				</Link>
+
+				<Link
+					to="/login"
+					className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+				>
+					Log in
 				</Link>
 			</div>
 

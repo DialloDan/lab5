@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Link} from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -31,7 +31,23 @@ function Login() {
 
 	return (
 		<div className="p-4">
-			<h1 className="text-2xl font-bold mb-4">Login</h1>
+			<div className="flex justify-between items-center mb-4">
+				<h1 className="text-2xl font-bold">Login</h1>
+				<Link
+					to="/tasks"
+					className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+				>
+					Tasks
+				</Link>
+
+				<Link
+					to="/agents"
+					className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+				>
+					Agents
+				</Link>
+			</div>
+
 			<form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 				<div>
 					<label htmlFor="email" className="block font-medium">

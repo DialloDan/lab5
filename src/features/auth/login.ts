@@ -11,7 +11,7 @@ export function useLogin() {
 	return useMutation({
 		mutationFn: async (creds: { email: string; password: string }) =>
 			LoginResponse.parse(
-				await apiFetch("/auth/login", {
+				await apiFetch("/login", {
 					method: "POST",
 					body: JSON.stringify(creds),
 				})

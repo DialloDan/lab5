@@ -1,4 +1,4 @@
-import { createFileRoute, useParams } from '@tanstack/react-router';
+import { createFileRoute, Link, useParams } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -49,11 +49,47 @@ function $taskId() {
 	};
 
 	if (isLoading) return <div>Loading task details...</div>;
-	if (isError || !task) return <div>Task not found or failed to load.</div>;
+	if (isError || !task) return (
+		<div className="p-4">
+			<div className="flex justify-between items-center mb-4">
+				<h1 className="text-2xl font-bold">Edit Task</h1>
+				<Link
+					to="/tasks"
+					className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+				>
+					Tasks
+				</Link>
+
+				<Link
+					to="/login"
+					className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+				>
+					Log in
+				</Link>
+			</div>
+			<div>Task not found or failed to load.</div>
+		</div>
+	);
 
 	return (
 		<div className="p-4">
-			<h1 className="text-2xl font-bold mb-4">Edit Task</h1>
+			<div className="flex justify-between items-center mb-4">
+				<h1 className="text-2xl font-bold">Edit Task</h1>
+				<Link
+					to="/tasks"
+					className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+				>
+					Tasks
+				</Link>
+
+				<Link
+					to="/login"
+					className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+				>
+					Log in
+				</Link>
+			</div>
+
 			<form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 				<div>
 					<label htmlFor="agent_id" className="block font-medium">
